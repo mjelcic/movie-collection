@@ -27,7 +27,7 @@ class PostUserDto extends AbstractPostBaseDto
     /**
      * @Assert\Type(type="string", message="Value: {{ value }} is not valid!")
      * @Assert\NotBlank(message="Field cannot be empty!")
-     * @Assert\Length(min="6", minMessage="Password must be at least {{ limit }} characters long!")
+     * @Assert\Length(min="5", minMessage="Password must be at least {{ limit }} characters long!")
      */
     private $password;
 
