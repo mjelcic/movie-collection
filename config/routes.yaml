@@ -1,3 +1,33 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+api_login_check:
+  path: api/login
+  methods:  [POST]
+
+user_create:
+  path: api/user
+  controller: App\Controller\UserController::post
+  methods:  [POST]
+
+movie_all:
+  path: api/movies
+  controller: App\Controller\MovieController::getAll
+  methods:  [GET]
+
+movie_list:
+  path: api/movies
+  controller: App\Controller\MovieController::getAll
+  methods:  [GET]
+
+movie_create:
+  path: api/movies
+  controller: App\Controller\MovieController::post
+  methods:  [POST]
+
+movie_update:
+  path: api/movies
+  controller: App\Controller\MovieController::put
+  methods:  [PUT]
+
+movie_single:
+  path: api/movies/{id}
+  controller: App\Controller\MovieController::getSingle
+  methods:  [GET]
