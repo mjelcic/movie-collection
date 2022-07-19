@@ -52,7 +52,7 @@ class MovieController extends AbstractFOSRestController
         if(!$updateMovieDto->isValid($this->validator)){
             throw new \InvalidArgumentException($updateMovieDto->getValidationErrors($this->validator));
         }
-        $movie = $this->movieService->updateMovie($updateMovieDto, $this->getUser()->getUserIdentifier());
+        $movie = $this->movieService->updateMovie($updateMovieDto);
         if($movie==null){
             return View::create($movie, Response::HTTP_NOT_FOUND);
         }
