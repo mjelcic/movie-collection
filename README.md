@@ -140,3 +140,5 @@ You can send requests on following endpoints using Postman or any other similar 
 ## Authentication
 All endpoints except api/login require authentication.
 
+## Mail setup
+To be able to receive mail notification on inserting new movie, update MAILER_DSN in .env file.
