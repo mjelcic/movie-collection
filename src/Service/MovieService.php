@@ -32,14 +32,14 @@ class MovieService
         $movie->setName($postMovieDto->getName());
         $movie->setCasts($postMovieDto->getCasts());
         $movie->setRatings($postMovieDto->getRatings());
-        $movie->setCreatedBy($this->getUserId());
+        $movie->setCreatedBy($this->getUserId() ? $this->getUserId() : 0);
         $movie->setReleaseDate(DateTime::createFromFormat('d-m-Y', $postMovieDto->getReleaseDate()));
         $movie->setDirector($postMovieDto->getDirector());
         $this->movieRepository->add($movie, true);
         return $this->MapMovieToGetMovieDto($movie);
     }
 
-    public function updateMovie(UpdateMovieDto $updateMovieDto, $userId): ?GetMovieDto
+    public function updateMovie(UpdateMovieDto $updateMovieDto): ?GetMovieDto
     {
 
         $movie = $this->movieRepository->findOneBy(["id"=>$updateMovieDto->getId(), "created_by"=>$this->getUserId()]);
@@ -63,7 +63,7 @@ class MovieService
 
     private function mapMovieToGetMovieDto($movie): GetMovieDto
     {
-        return new GetMovieDto($movie->getId(), $movie->getName(), $movie->getCasts(), $movie->getReleaseDate(), $movie->getDirector(), $movie->getRatings());
+        return new GetMovieDto($movie->getId(), $movie->getName(), $movie->getCasts(), $movie->getReleaseDate()->format('d-m-Y'), $movie->getDirector(), $movie->getRatings());
     }
 
     public function getAll()
@@ -82,10 +82,15 @@ class MovieService
         return $query->getResult();
     }
 
-    private function getUserId(): int
+    private function getUserId(): ?int
     {
         /** @var User $user */
         $user = $this->security->getUser();
-        return $user != null ? $user->getId() : 0;
+        if($user!= null){
+            return $user->getId();
+        }
+        else{
+            return null;
+        }
     }
 }
