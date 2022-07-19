@@ -3,7 +3,7 @@ api_login_check:
   methods:  [POST]
 
 user_create:
-  path: api/user
+  path: api/users
   controller: App\Controller\UserController::post
   methods:  [POST]
 
