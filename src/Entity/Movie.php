@@ -8,29 +8,23 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass=MovieRepository::class)
  */
-class Movie
+class Movie extends AbstractBaseEntity
 {
-    /**
-     * @ORM\Id
-     * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
-     */
-    private int $id;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $name;
+    private string $name;
 
     /**
      * @ORM\Column(type="array")
      */
-    private $casts = [];
+    private array $casts = [];
 
     /**
      * @ORM\Column(type="date")
      */
-    private $release_date;
+    private ?\DateTimeInterface $release_date;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -43,10 +37,6 @@ class Movie
     private array $ratings = [];
 
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getName(): ?string
     {

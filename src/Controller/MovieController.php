@@ -6,6 +6,7 @@ use App\Dto\ApiResponse\ApiResponse;
 use App\Dto\Movie\PostMovieDto;
 use App\Dto\Movie\UpdateMovieDto;
 use App\Entity\Movie;
+use App\Entity\User;
 use App\Service\MovieService;
 use FOS\RestBundle\Controller\AbstractFOSRestController;
 use FOS\RestBundle\View\View;
@@ -20,6 +21,7 @@ class MovieController extends AbstractFOSRestController
     private MovieService $movieService;
     private ValidatorInterface $validator;
 
+
     public function __construct(MovieService $movieService, ValidatorInterface $validator)
     {
         $this->movieService = $movieService;
@@ -32,6 +34,8 @@ class MovieController extends AbstractFOSRestController
      * @return View
      */
     public function post(PostMovieDto $postMovieDto) : View{
+        $user =  $this->getUser();
+
         if(!$postMovieDto->isValid($this->validator)){
             throw new \InvalidArgumentException($postMovieDto->getValidationErrors($this->validator));
         }
@@ -48,7 +52,7 @@ class MovieController extends AbstractFOSRestController
         if(!$updateMovieDto->isValid($this->validator)){
             throw new \InvalidArgumentException($updateMovieDto->getValidationErrors($this->validator));
         }
-        $movie = $this->movieService->updateMovie($updateMovieDto);
+        $movie = $this->movieService->updateMovie($updateMovieDto, $this->getUser()->getUserIdentifier());
         if($movie==null){
             return View::create($movie, Response::HTTP_NOT_FOUND);
         }

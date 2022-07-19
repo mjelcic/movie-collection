@@ -23,22 +23,22 @@ class User extends AbstractBaseEntity implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="string", length=50)
      */
-    private $username;
+    private string $username;
 
     /**
      * @ORM\Column(type="string", length=64)
      */
-    private $password;
+    private ?string $password;
 
     /**
      * @ORM\Column(type="string", length=50, unique=true)
      */
-    private $email;
+    private string $email;
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private bool $isActive;
 
     /**
      * @ORM\Column(type="string", length=100)
@@ -51,12 +51,12 @@ class User extends AbstractBaseEntity implements UserInterface, \Serializable
         $this->isActive = true;
     }
 
-    public function getUsername()
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function setUsername($username)
+    public function setUsername($username): User
     {
         $this->username = $username;
         return $this;
@@ -70,40 +70,40 @@ class User extends AbstractBaseEntity implements UserInterface, \Serializable
         return null;
     }
 
-    public function isActive()
+    public function isActive(): bool
     {
         return $this->isActive;
     }
 
-    public function setIsActive($isActive)
+    public function setIsActive($isActive): User
     {
         $this->isActive = $isActive;
         return $this;
     }
 
-    public function getPassword()
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function setPassword($password)
+    public function setPassword($password): User
     {
         $this->password = $password;
         return $this;
     }
 
-    public function getEmail()
+    public function getEmail(): string
     {
         return $this->email;
     }
 
-    public function setEmail($email)
+    public function setEmail($email): User
     {
         $this->email = $email;
         return $this;
     }
 
-    public function setRoles($roles)
+    public function setRoles($roles): User
     {
         $this->roles = implode(";", $roles);
 
@@ -129,7 +129,7 @@ class User extends AbstractBaseEntity implements UserInterface, \Serializable
     }
 
     /** @see \Serializable::serialize() */
-    public function serialize()
+    public function serialize(): ?string
     {
         return serialize(array(
             $this->id,
