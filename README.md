@@ -11,6 +11,10 @@ git clone https://github.com/mjelcic/movie-collection.git
 docker-compose up
 ```
 
+Base URL will be: 0.0.0.0:80
+
+You can send requests on following endpoints using Postman or any other similar tool.
+
 ## Exposed endpoints
 
 ### GET api/movies
