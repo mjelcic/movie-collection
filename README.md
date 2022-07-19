@@ -129,7 +129,7 @@ You can send requests on following endpoints using Postman or any other similar 
 #### Example output
 ```json
 {
-    "token": string,
+    "token": "token_value",
 }
 ```
 
