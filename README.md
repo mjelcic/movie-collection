@@ -1,5 +1,5 @@
-# movie-collection
-This is a test project for adding movies to the database
+# The movie-collection project
+This is a test project for adding movies to the database.
 
 ## How to run the project
 1. Clone project
