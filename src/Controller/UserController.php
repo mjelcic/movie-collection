@@ -50,15 +50,6 @@ class UserController  extends AbstractFOSRestController
         $this->passwordEncoder = $passwordEncoder;
     }
 
-    public function getSingle(): View
-    {
-        $user = $this->tokenStorage->getToken()->getUser();
-        $dto = $this->service->getUserById($user->getUserIdentifier());
-
-        // In case our GET was a success we need to return a 200 HTTP OK response with the request object
-        return View::create($dto, Response::HTTP_OK);
-    }
-
     /**
      * @ParamConverter("postUserDto", converter="fos_rest.request_body")
      * @param PostUserDto $postUserDto

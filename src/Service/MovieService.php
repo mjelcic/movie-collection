@@ -76,7 +76,7 @@ class MovieService
         m.ratings)
         FROM App\Entity\Movie m    
         WHERE
-        created_by = %userId
+        m.created_by = :userId
         ")
         ->setParameter("userId",$this->getUserId());
         return $query->getResult();
