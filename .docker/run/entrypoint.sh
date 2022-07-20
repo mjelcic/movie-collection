@@ -14,11 +14,9 @@ then
   composer install || exit
 fi
 
-#Migrate db
 php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 
-#Generate keypair for jwt
 if [ ! -d "config/jwt" ]
 then
   php bin/console lexik:jwt:generate-keypair
