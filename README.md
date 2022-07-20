@@ -2,11 +2,16 @@
 This is a test project for adding movies to the database.
 
 ## How to run the project
+Make sure that docker is running and sollow these steps:
 1. Clone project
 ```git
 git clone https://github.com/mjelcic/movie-collection.git
 ```
-2. Run the following command: 
+3. Change directory: 
+```docker
+cd movie-collection
+```
+3. Run the following command:
 ```docker
 docker-compose up
 ```
