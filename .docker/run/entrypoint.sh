@@ -1,26 +1,8 @@
-#!/bin/sh
-. /application/.docker/run/wait-for-service.sh
-. /application/.docker/run/init-database.sh
-
-# Wait until database is ready
-wait_for_service "127.0.0.1" "3306"
-
 # Set permissions for app folder
 chown -R www-data:www-data /application
 
 # Install dependencies
 cd /application || exit
-
-while  [ ! -f  "package.json" ]
-do
-    echo "Missing package.json"
-done
-
-if [ ! -d "node_modules" ]
-then
-  npm install --no-package-lock || exit
-  npm run dev || exit
-fi
 
 while  [ ! -f  "composer.json" ]
 do
@@ -32,7 +14,15 @@ then
   composer install || exit
 fi
 
-initialize_databases
+#Migrate db
+php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+
+#Generate keypair for jwt
+if [ ! -d "config/jwt" ]
+then
+  php bin/console lexik:jwt:generate-keypair
+fi
 
 # Start application
 php-fpm -F -R

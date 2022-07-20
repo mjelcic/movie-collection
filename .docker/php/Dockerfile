@@ -3,6 +3,8 @@ ARG PHP_VERSION=7.4
 FROM php:${PHP_VERSION}-fpm
 
 RUN apt-get update && apt-get install -y \
+    zip  \
+    unzip \
     git \
     npm \
     nano \
@@ -13,7 +15,9 @@ RUN curl -sS https://getcomposer.org/installer | php && mv composer.phar /usr/lo
 
 COPY ../../. .
 
-RUN composer install
-
 # Remove APT cache
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+
+RUN chmod +x .docker/run/entrypoint.sh
+
+ENTRYPOINT ["sh",".docker/run/entrypoint.sh"]
