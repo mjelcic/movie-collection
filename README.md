@@ -7,7 +7,7 @@ Make sure that docker is running and sollow these steps:
 ```git
 git clone https://github.com/mjelcic/movie-collection.git
 ```
-3. Change directory: 
+2. Change directory: 
 ```docker
 cd movie-collection
 ```
