@@ -12,6 +12,6 @@ COPY ../../. .
 
 RUN apt-get clean; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
 
-RUN chmod +x docker/docker-entrypoint.sh
+RUN chmod +x docker/docker-entrypoint.php
 
-ENTRYPOINT ["sh","docker/docker-entrypoint.sh"]
+ENTRYPOINT ["php","docker/docker-entrypoint.php"]
